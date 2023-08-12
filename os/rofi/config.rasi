@@ -2,6 +2,7 @@ configuration {
 	display-drun: "Applications:";
 	display-window: "Windows:";
 	display-run: "Run:";
+	display-combi: "Search:";
 	drun-display-format: "{icon} {name}";
 	show-icons: true;
 	combi-modi: "window,drun,run";
