@@ -1,0 +1,9 @@
+#! /bin/sh
+
+projectsDir="$HOME/dev"
+
+chosen=$(ls $projectsDir | rofi -dmenu -i -p "Open Project")
+
+if [ -n "$chosen" ]; then
+	code $projectsDir/$chosen
+fi
