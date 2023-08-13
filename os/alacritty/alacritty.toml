@@ -50,6 +50,10 @@ opacity = 0.95
 general = "Alacritty"
 instance = "Alacritty"
 
+[window.dimensions]
+columns = 90
+lines = 30
+
 [window.padding]
 x = 12
 y = 10
