@@ -1,8 +1,8 @@
 
 * {
-  bg: #1e1e2e66;
-  bg-alt: #585b7066;
-  bg-selected: #31324466;
+  bg: #1e1e2ecc;
+  bg-alt: #585b70cc;
+  bg-selected: #313244cc;
 
   fg: #cdd6f4;
   fg-alt: #7f849c;
@@ -14,7 +14,7 @@
 }
 
 window {
-  width: 40%;
+  width: 35%;
   background-color: @bg;
   border-radius: 8px;
 }
