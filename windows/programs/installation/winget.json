@@ -1,0 +1,125 @@
+{
+	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate" : "2025-07-19T21:44:45.316-00:00",
+	"Sources" : 
+	[
+		{
+			"Packages" : 
+			[
+				{
+					"PackageIdentifier" : "7zip.7zip"
+				},
+				{
+					"PackageIdentifier" : "Docker.DockerDesktop"
+				},
+				{
+					"PackageIdentifier" : "Git.Git"
+				},
+				{
+					"PackageIdentifier" : "flick9000.WinScript"
+				},
+				{
+					"PackageIdentifier" : "SoftDeluxe.FreeDownloadManager"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2010.x64"
+				},
+				{
+					"PackageIdentifier" : "Google.Chrome"
+				},
+				{
+					"PackageIdentifier" : "GitHub.cli"
+				},
+				{
+					"PackageIdentifier" : "JanDeDobbeleer.OhMyPosh"
+				},
+				{
+					"PackageIdentifier" : "Nvidia.PhysX"
+				},
+				{
+					"PackageIdentifier" : "AnyDesk.AnyDesk"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Edge"
+				},
+				{
+					"PackageIdentifier" : "OBSProject.OBSStudio"
+				},
+				{
+					"PackageIdentifier" : "Valve.Steam"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2012.x86"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x86"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2005.x86"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2010.x86"
+				},
+				{
+					"PackageIdentifier" : "EpicGames.EpicGamesLauncher"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCRedist.2012.x64"
+				},
+				{
+					"PackageIdentifier" : "Brave.Brave"
+				},
+				{
+					"PackageIdentifier" : "Google.Brotli"
+				},
+				{
+					"PackageIdentifier" : "Gyan.FFmpeg"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.OneDrive"
+				},
+				{
+					"PackageIdentifier" : "Zoom.Zoom.EXE"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerToys"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VisualStudioCode"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.Teams"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.AppInstaller"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.PowerShell"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.UI.Xaml.2.8"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.VCLibs.Desktop.14"
+				},
+				{
+					"PackageIdentifier" : "Microsoft.WindowsTerminal"
+				}
+			],
+			"SourceDetails" : 
+			{
+				"Argument" : "https://cdn.winget.microsoft.com/cache",
+				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name" : "winget",
+				"Type" : "Microsoft.PreIndexed.Package"
+			}
+		}
+	],
+	"WinGetVersion" : "1.11.400"
+}
