@@ -1,6 +1,6 @@
 {
 	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-07-19T21:44:45.316-00:00",
+	"CreationDate" : "2025-07-23T11:27:30.485-00:00",
 	"Sources" : 
 	[
 		{
@@ -71,6 +71,9 @@
 				},
 				{
 					"PackageIdentifier" : "Microsoft.VCRedist.2012.x64"
+				},
+				{
+					"PackageIdentifier" : "Bruno.Bruno"
 				},
 				{
 					"PackageIdentifier" : "Brave.Brave"
