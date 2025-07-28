@@ -22,7 +22,7 @@ $platform_tools_url = "https://dl.google.com/android/repository/platform-tools-l
 $platform_tools_zip = "$tmp_dir/platform-tools.tmp.zip"
 Invoke-WebRequest -Uri $platform_tools_url -OutFile $platform_tools_zip
 Expand-Archive -LiteralPath $platform_tools_zip -DestinationPath "$tmp_dir"
-Move-Item -Path "$tmp_dir/platform-tools/*" -Destination $install_dir
+Move-Item -Path "$tmp_dir/platform-tools/*" -Destination $install_dir -Force
 Remove-Item $platform_tools_zip
 Write-Host "✅ Installed platform tools"
 
