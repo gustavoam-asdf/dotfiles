@@ -1,128 +1,140 @@
 {
-	"$schema" : "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate" : "2025-07-23T11:27:30.485-00:00",
-	"Sources" : 
-	[
+	"$schema": "https://aka.ms/winget-packages.schema.2.0.json",
+	"CreationDate": "2025-07-29T18:10:54.018-00:00",
+	"Sources": [
 		{
-			"Packages" : 
-			[
+			"Packages": [
 				{
-					"PackageIdentifier" : "7zip.7zip"
+					"PackageIdentifier": "7zip.7zip"
 				},
 				{
-					"PackageIdentifier" : "Docker.DockerDesktop"
+					"PackageIdentifier": "Docker.DockerDesktop"
 				},
 				{
-					"PackageIdentifier" : "Git.Git"
+					"PackageIdentifier": "Git.Git"
 				},
 				{
-					"PackageIdentifier" : "flick9000.WinScript"
+					"PackageIdentifier": "flick9000.WinScript"
 				},
 				{
-					"PackageIdentifier" : "SoftDeluxe.FreeDownloadManager"
+					"PackageIdentifier": "SoftDeluxe.FreeDownloadManager"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2010.x64"
+					"PackageIdentifier": "JanDeDobbeleer.OhMyPosh"
 				},
 				{
-					"PackageIdentifier" : "Google.Chrome"
+					"PackageIdentifier": "Microsoft.VCRedist.2010.x64"
 				},
 				{
-					"PackageIdentifier" : "GitHub.cli"
+					"PackageIdentifier": "WireGuard.WireGuard"
 				},
 				{
-					"PackageIdentifier" : "JanDeDobbeleer.OhMyPosh"
+					"PackageIdentifier": "GitHub.cli"
 				},
 				{
-					"PackageIdentifier" : "Nvidia.PhysX"
+					"PackageIdentifier": "Nvidia.PhysX"
 				},
 				{
-					"PackageIdentifier" : "AnyDesk.AnyDesk"
+					"PackageIdentifier": "Google.Chrome"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.Edge"
+					"PackageIdentifier": "AnyDesk.AnyDesk"
 				},
 				{
-					"PackageIdentifier" : "OBSProject.OBSStudio"
+					"PackageIdentifier": "Microsoft.Edge"
 				},
 				{
-					"PackageIdentifier" : "Valve.Steam"
+					"PackageIdentifier": "Insecure.Nmap"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2012.x86"
+					"PackageIdentifier": "OBSProject.OBSStudio"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x86"
+					"PackageIdentifier": "Valve.Steam"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.DotNet.DesktopRuntime.6"
+					"PackageIdentifier": "Microsoft.DotNet.DesktopRuntime.6"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2005.x86"
+					"PackageIdentifier": "Microsoft.VCRedist.2015+.x86"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2010.x86"
+					"PackageIdentifier": "Microsoft.VCRedist.2012.x86"
 				},
 				{
-					"PackageIdentifier" : "EpicGames.EpicGamesLauncher"
+					"PackageIdentifier": "Microsoft.VCRedist.2005.x86"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2015+.x64"
+					"PackageIdentifier": "Microsoft.VCRedist.2008.x86"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCRedist.2012.x64"
+					"PackageIdentifier": "Microsoft.VCRedist.2013.x86"
 				},
 				{
-					"PackageIdentifier" : "Bruno.Bruno"
+					"PackageIdentifier": "Microsoft.VCRedist.2010.x86"
 				},
 				{
-					"PackageIdentifier" : "Brave.Brave"
+					"PackageIdentifier": "EpicGames.EpicGamesLauncher"
 				},
 				{
-					"PackageIdentifier" : "Google.Brotli"
+					"PackageIdentifier": "Microsoft.VCRedist.2012.x64"
 				},
 				{
-					"PackageIdentifier" : "Gyan.FFmpeg"
+					"PackageIdentifier": "Microsoft.VCRedist.2015+.x64"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.OneDrive"
+					"PackageIdentifier": "Bruno.Bruno"
 				},
 				{
-					"PackageIdentifier" : "Zoom.Zoom.EXE"
+					"PackageIdentifier": "Brave.Brave"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.PowerToys"
+					"PackageIdentifier": "Google.Brotli"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VisualStudioCode"
+					"PackageIdentifier": "Gyan.FFmpeg"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.Teams"
+					"PackageIdentifier": "Microsoft.OneDrive"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.AppInstaller"
+					"PackageIdentifier": "Schniz.fnm"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.PowerShell"
+					"PackageIdentifier": "Zoom.Zoom.EXE"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.UI.Xaml.2.8"
+					"PackageIdentifier": "Microsoft.PowerToys"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.VCLibs.Desktop.14"
+					"PackageIdentifier": "Microsoft.VisualStudioCode"
 				},
 				{
-					"PackageIdentifier" : "Microsoft.WindowsTerminal"
+					"PackageIdentifier": "Microsoft.Teams"
+				},
+				{
+					"PackageIdentifier": "Microsoft.AppInstaller"
+				},
+				{
+					"PackageIdentifier": "Microsoft.PowerShell"
+				},
+				{
+					"PackageIdentifier": "Microsoft.UI.Xaml.2.8"
+				},
+				{
+					"PackageIdentifier": "Microsoft.VCLibs.Desktop.14"
+				},
+				{
+					"PackageIdentifier": "Microsoft.WindowsTerminal"
 				}
 			],
-			"SourceDetails" : 
-			{
-				"Argument" : "https://cdn.winget.microsoft.com/cache",
-				"Identifier" : "Microsoft.Winget.Source_8wekyb3d8bbwe",
-				"Name" : "winget",
-				"Type" : "Microsoft.PreIndexed.Package"
+			"SourceDetails": {
+				"Argument": "https://cdn.winget.microsoft.com/cache",
+				"Identifier": "Microsoft.Winget.Source_8wekyb3d8bbwe",
+				"Name": "winget",
+				"Type": "Microsoft.PreIndexed.Package"
 			}
 		}
 	],
-	"WinGetVersion" : "1.11.400"
+	"WinGetVersion": "1.11.430"
 }
