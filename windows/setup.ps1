@@ -25,3 +25,11 @@ if (-not ($userPath -like "*$binDir*")) {
 }
 
 pwsh $PSScriptRoot/installation/fonts.ps1
+
+
+$windowsTerminalConfig = [PSCustomObject]@{
+	Source = "$PSScriptRoot/config/windows-terminal/settings.json"
+	Target = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
+}
+Remove-Item -Path $windowsTerminalConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source > $null
