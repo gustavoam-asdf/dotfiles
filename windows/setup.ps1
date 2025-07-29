@@ -11,17 +11,17 @@ sudo winget import $PSScriptRoot/installation/winget.json
 # Read fresh environment variables after installation
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path")
 
-$bin_dir = "$PSScriptRoot/bin"
-New-Item $bin_dir -ItemType Directory -Force > $null
-$bin_dir = Resolve-Path -Path $bin_dir
+$binDir = "$PSScriptRoot/bin"
+New-Item $binDir -ItemType Directory -Force > $null
+$binDir = Resolve-Path -Path $binDir
 
-pwsh $PSScriptRoot/installation/unlisted.ps1 --install_dir $bin_dir
+pwsh $PSScriptRoot/installation/unlisted.ps1 --install_dir $binDir
 
-$user_path = [System.Environment]::GetEnvironmentVariable("Path", "User")
+$userPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
 
-if (-not ($user_path -like "*$bin_dir*")) {
-	[System.Environment]::SetEnvironmentVariable("Path", $user_path + "$bin_dir;", "User")
-	$env:Path += "$bin_dir;"
+if (-not ($userPath -like "*$binDir*")) {
+	[System.Environment]::SetEnvironmentVariable("Path", $userPath + "$binDir;", "User")
+	$env:Path += "$binDir;"
 }
 
 pwsh $PSScriptRoot/installation/fonts.ps1
