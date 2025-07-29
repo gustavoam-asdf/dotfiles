@@ -33,3 +33,11 @@ $windowsTerminalConfig = [PSCustomObject]@{
 }
 Remove-Item -Path $windowsTerminalConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source > $null
+
+
+$gitConfig = [PSCustomObject]@{
+	Source = "$PSScriptRoot/config/git/.gitconfig"
+	Target = "$HOME/.gitconfig"
+}
+Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source > $null

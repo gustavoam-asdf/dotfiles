@@ -1,0 +1,9 @@
+[user]
+	name = Gustavo A.
+	email = gustavo.atencio@outlook.com
+[core]
+	longpaths = true
+	autocrlf = false
+	ignoreCase = false
+[init]
+	defaultbranch = main
