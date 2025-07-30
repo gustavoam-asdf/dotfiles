@@ -6,29 +6,31 @@ if ($LASTEXITCODE -ne 0) {
 	exit $LASTEXITCODE
 }
 
-sudo winget import $PSScriptRoot/installation/winget.json
+$dotFilesDir = Resolve-Path $PSScriptRoot
 
-# Read fresh environment variables after installation
-$env:Path = [System.Environment]::GetEnvironmentVariable("Path")
-
-$binDir = "$PSScriptRoot/bin"
+$binDir = "$dotFilesDir/bin"
 New-Item $binDir -ItemType Directory -Force > $null
 $binDir = Resolve-Path -Path $binDir
 
-pwsh $PSScriptRoot/installation/unlisted.ps1 --install_dir $binDir
-
+# Config environment variables
+[System.Environment]::SetEnvironmentVariable("DotFiles", $dotfilesDir, "User")
 $userPath = [System.Environment]::GetEnvironmentVariable("Path", "User")
-
 if (-not ($userPath -like "*$binDir*")) {
 	[System.Environment]::SetEnvironmentVariable("Path", $userPath + "$binDir;", "User")
 	$env:Path += "$binDir;"
 }
 
-pwsh $PSScriptRoot/installation/fonts.ps1
+sudo pwsh $dotFilesDir/installation/fonts.ps1
+
+sudo winget import $dotFilesDir/installation/winget.json
+pwsh $dotFilesDir/installation/unlisted.ps1 --install_dir $binDir
+
+# Read fresh environment variables after installation
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path")
 
 # Windows Terminal config
 $windowsTerminalConfig = [PSCustomObject]@{
-	Source = "$PSScriptRoot/config/windows-terminal/settings.json"
+	Source = "$dotFilesDir/config/windows-terminal/settings.json"
 	Target = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 }
 Remove-Item -Path $windowsTerminalConfig.Target -Force -ErrorAction Ignore
@@ -37,7 +39,7 @@ New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $win
 
 # Git config
 $gitConfig = [PSCustomObject]@{
-	Source = "$PSScriptRoot/config/git/.gitconfig"
+	Source = "$dotFilesDir/config/git/.gitconfig"
 	Target = "$HOME/.gitconfig"
 }
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
@@ -45,7 +47,7 @@ New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Sourc
 
 # Powershell config
 $pwshConfig = [PSCustomObject]@{
-	Source = "$PSScriptRoot/config/powershell/profile.ps1"
+	Source = "$dotFilesDir/config/powershell/profile.ps1"
 	Target = "$PROFILE"
 }
 Remove-Item -Path $pwshConfig.Target -Force -ErrorAction Ignore
@@ -56,16 +58,16 @@ Install-Module -Name kmt.winget.autocomplete
 Install-Module -Name posh-git
 Install-Module -Name posh-docker
 Install-Module -Name npm-completion
-$powershellCompletionsDir = "$PSScriptRoot/config/powershell/completions"
+$powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
-$powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
+$powershellProfileInitDir = "$dotFilesDir/config/powershell/init"
 New-Item -ItemType Directory -Path $powershellProfileInitDir -Force > $null
 
 # Oh My Posh config
-$themesDir = "$PSScriptRoot/config/powershell/themes"
+$themesDir = "$dotFilesDir/config/powershell/themes"
 New-Item -ItemType Directory -Path $themesDir -Force > $null
 $themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/cloud-context.omp.json"
-Invoke-WebRequest -Uri $themeUrl -OutFile "$themesDir/theme.json"
+Invoke-WebRequest -Uri $themeUrl -OutFile "$themesDir/default.omp.json"
 
 
 # GitHub CLI config
@@ -79,7 +81,7 @@ fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
 fnm use default
 corepack enable
 $npmConfig = [PSCustomObject]@{
-	Source = "$PSScriptRoot/config/npm/.npmrc"
+	Source = "$dotFilesDir/config/npm/.npmrc"
 	Target = "$HOME/.npmrc"
 }
 Remove-Item -Path $npmConfig.Target -Force -ErrorAction Ignore

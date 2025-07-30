@@ -9,4 +9,4 @@ Enable-PowerType
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
 
 # Oh My Posh
-oh-my-posh init pwsh --config "$powershellrc\themes\negligible.omp.json" | Invoke-Expression
+oh-my-posh init pwsh --config "$env:DotFiles/config/powershell/themes/default.omp.json" | Invoke-Expression
