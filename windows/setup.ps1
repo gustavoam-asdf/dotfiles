@@ -47,6 +47,9 @@ $powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
 New-Item -ItemType Directory -Path $powershellProfileInitDir -Force > $null
 
+# GitHub CLI config
+gh completion --shell powershell > $powershellCompletionsDir/github-cli.ps1
+
 # NodeJs config
 fnm completions --shell powershell > $powershellCompletionsDir/fnm.ps1
 Write-Output "fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression" > $powershellProfileInitDir/fnm.ps1
