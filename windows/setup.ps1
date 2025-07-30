@@ -43,10 +43,30 @@ $gitConfig = [PSCustomObject]@{
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source -ErrorAction Stop > $null
 
+# Powershell config
+$pwshConfig = [PSCustomObject]@{
+	Source = "$PSScriptRoot/config/powershell/profile.ps1"
+	Target = "$PROFILE"
+}
+Remove-Item -Path $pwshConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $pwshConfig.Target -Target $pwshConfig.Source -ErrorAction Stop > $null
+Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-Module -Name PowerType
+Install-Module -Name kmt.winget.autocomplete
+Install-Module -Name posh-git
+Install-Module -Name posh-docker
+Install-Module -Name npm-completion
 $powershellCompletionsDir = "$PSScriptRoot/config/powershell/completions"
-$powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
+$powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
 New-Item -ItemType Directory -Path $powershellProfileInitDir -Force > $null
+
+# Oh My Posh config
+$themesDir = "$PSScriptRoot/config/powershell/themes"
+New-Item -ItemType Directory -Path $themesDir -Force > $null
+$themeUrl = "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/refs/heads/main/themes/cloud-context.omp.json"
+Invoke-WebRequest -Uri $themeUrl -OutFile "$themesDir/theme.json"
+
 
 # GitHub CLI config
 gh completion --shell powershell > $powershellCompletionsDir/github-cli.ps1
