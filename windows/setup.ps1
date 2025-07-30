@@ -41,3 +41,22 @@ $gitConfig = [PSCustomObject]@{
 }
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source > $null
+
+$powershellCompletionsDir = "$PSScriptRoot/config/powershell/completions"
+$powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
+New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
+New-Item -ItemType Directory -Path $powershellProfileInitDir -Force > $null
+
+# NodeJs config
+fnm completions --shell powershell > $powershellCompletionsDir/fnm.ps1
+Write-Output "fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression" > $powershellProfileInitDir/fnm.ps1
+fnm install --lts
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+fnm use default
+corepack enable
+$npmConfig = [PSCustomObject]@{
+	Source = "$PSScriptRoot/config/npm/.npmrc"
+	Target = "$HOME/.npmrc"
+}
+Remove-Item -Path $npmConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source > $null
