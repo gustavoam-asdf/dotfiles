@@ -26,21 +26,22 @@ if (-not ($userPath -like "*$binDir*")) {
 
 pwsh $PSScriptRoot/installation/fonts.ps1
 
-
+# Windows Terminal config
 $windowsTerminalConfig = [PSCustomObject]@{
 	Source = "$PSScriptRoot/config/windows-terminal/settings.json"
 	Target = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 }
 Remove-Item -Path $windowsTerminalConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source > $null
+New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source -ErrorAction Stop > $null
 
 
+# Git config
 $gitConfig = [PSCustomObject]@{
 	Source = "$PSScriptRoot/config/git/.gitconfig"
 	Target = "$HOME/.gitconfig"
 }
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source > $null
+New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source -ErrorAction Stop > $null
 
 $powershellCompletionsDir = "$PSScriptRoot/config/powershell/completions"
 $powershellProfileInitDir = "$PSScriptRoot/config/powershell/init"
@@ -62,4 +63,4 @@ $npmConfig = [PSCustomObject]@{
 	Target = "$HOME/.npmrc"
 }
 Remove-Item -Path $npmConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source > $null
+New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source -ErrorAction Stop > $null
