@@ -46,12 +46,7 @@ Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source -ErrorAction Stop > $null
 
 # Powershell config
-$pwshConfig = [PSCustomObject]@{
-	Source = "$dotFilesDir/config/powershell/profile.ps1"
-	Target = "$PROFILE"
-}
-Remove-Item -Path $pwshConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $pwshConfig.Target -Target $pwshConfig.Source -ErrorAction Stop > $null
+Import-Module PowerShellGet
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 Install-Module -Name PowerType
 Install-Module -Name kmt.winget.autocomplete
@@ -62,6 +57,12 @@ $powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
 $powershellProfileInitDir = "$dotFilesDir/config/powershell/init"
 New-Item -ItemType Directory -Path $powershellProfileInitDir -Force > $null
+$pwshConfig = [PSCustomObject]@{
+	Source = "$dotFilesDir/config/powershell/profile.ps1"
+	Target = "$PROFILE"
+}
+Remove-Item -Path $pwshConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $pwshConfig.Target -Target $pwshConfig.Source -ErrorAction Stop > $null
 
 # Oh My Posh config
 $themesDir = "$dotFilesDir/config/powershell/themes"
