@@ -87,3 +87,6 @@ $npmConfig = [PSCustomObject]@{
 }
 Remove-Item -Path $npmConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source -ErrorAction Stop > $null
+
+# Bun config
+pwsh -c "irm bun.sh/install.ps1 | iex"
