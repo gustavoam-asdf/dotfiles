@@ -1,11 +1,9 @@
-Import-Module -Name PowerType
-Import-Module -Name kmt.winget.autocomplete
+Import-Module -Name Microsoft.WinGet.Configuration
+Import-Module -Name WinGet-Essentials
 Import-Module -Name posh-git
-Import-Module -Name posh-docker
-Import-Module -Name npm-completion
+Import-Module -Name DockerCompletion
+Import-Module -Name pnpm-tab-completion
 
-# PowerType
-Enable-PowerType
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
 
 # Oh My Posh

@@ -48,12 +48,14 @@ New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Sourc
 
 # Powershell config
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-Install-PackageProvider -Name NuGet -Force
-Install-Module -Name PowerType
-Install-Module -Name kmt.winget.autocomplete
+if($null -eq (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Ignore)) {
+	Install-PackageProvider -Name nuget -MinimumVersion 2.8.5.201 -Force
+}
+Install-Module -Name Microsoft.WinGet.Configuration
+Install-Module -Name WinGet-Essentials
 Install-Module -Name posh-git
-Install-Module -Name posh-docker
-Install-Module -Name npm-completion
+Install-Module -Name DockerCompletion
+Install-Module -Name pnpm-tab-completion
 $powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
 $powershellProfileInitDir = "$dotFilesDir/config/powershell/init"
