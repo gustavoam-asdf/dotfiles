@@ -53,9 +53,18 @@ if($null -eq (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Ignore
 }
 Install-Module -Name Microsoft.WinGet.Configuration
 Install-Module -Name WinGet-Essentials
-Install-Module -Name posh-git
 Install-Module -Name DockerCompletion
-Install-Module -Name pnpm-tab-completion
+# https://github.com/abgox/PSCompletions
+Install-Module -Name PSCompletions
+Import-Module -Name PSCompletions
+psc add pwsh
+psc add oh-my-posh
+psc add winget
+psc add wsl
+psc add git
+psc add env
+psc add fnm
+psc add pnpm
 $powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
 $powershellProfileInitDir = "$dotFilesDir/config/powershell/init"

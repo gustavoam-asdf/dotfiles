@@ -1,8 +1,7 @@
 Import-Module -Name Microsoft.WinGet.Configuration
 Import-Module -Name WinGet-Essentials
-Import-Module -Name posh-git
 Import-Module -Name DockerCompletion
-Import-Module -Name pnpm-tab-completion
+Import-Module -Name PSCompletions
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
 
