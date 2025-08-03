@@ -4,6 +4,8 @@ param (
 	[string]$install_dir
 )
 
+$ErrorActionPreference = 'Stop'
+
 if (-not (Test-Path $install_dir)) {
 	New-Item $install_dir -ItemType Directory -Force > $null
 }

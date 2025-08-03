@@ -1,4 +1,5 @@
 Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
 
 sudo config --enable normal
 
@@ -34,7 +35,7 @@ $windowsTerminalConfig = [PSCustomObject]@{
 	Target = "$env:LOCALAPPDATA/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json"
 }
 Remove-Item -Path $windowsTerminalConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source -ErrorAction Stop > $null
+New-Item -ItemType SymbolicLink -Path $windowsTerminalConfig.Target -Target $windowsTerminalConfig.Source > $null
 
 
 # Git config
@@ -43,11 +44,11 @@ $gitConfig = [PSCustomObject]@{
 	Target = "$HOME/.gitconfig"
 }
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source -ErrorAction Stop > $null
+New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source > $null
 
 # Powershell config
-Import-Module PowerShellGet
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+Install-PackageProvider -Name NuGet -Force
 Install-Module -Name PowerType
 Install-Module -Name kmt.winget.autocomplete
 Install-Module -Name posh-git
@@ -62,7 +63,7 @@ $pwshConfig = [PSCustomObject]@{
 	Target = "$PROFILE"
 }
 Remove-Item -Path $pwshConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $pwshConfig.Target -Target $pwshConfig.Source -ErrorAction Stop > $null
+New-Item -ItemType SymbolicLink -Path $pwshConfig.Target -Target $pwshConfig.Source > $null
 
 # Oh My Posh config
 $themesDir = "$dotFilesDir/config/powershell/themes"
@@ -86,7 +87,7 @@ $npmConfig = [PSCustomObject]@{
 	Target = "$HOME/.npmrc"
 }
 Remove-Item -Path $npmConfig.Target -Force -ErrorAction Ignore
-New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source -ErrorAction Stop > $null
+New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Source > $null
 
 # Bun config
 pwsh -c "irm bun.sh/install.ps1 | iex"

@@ -1,6 +1,7 @@
 [CmdletBinding()]
 param ()
 
+$ErrorActionPreference = 'Stop'
 Add-Type -AssemblyName System.Drawing
 
 function Get-FontGlyphTypefaceName {
@@ -11,7 +12,7 @@ function Get-FontGlyphTypefaceName {
 	)
 
 	try {
-		Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase -ErrorAction Stop
+		Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase
 	}
 	catch {
 		Write-Error "Failed to load WPF assemblies. This function requires WPF components to run. $($_.Exception.Message)"
@@ -84,12 +85,12 @@ Expand-Archive -LiteralPath $fontZip -DestinationPath "$tmpDir/cascadia-code" -F
 $selectedFontName = "CaskaydiaCoveNerdFontMono-Regular.ttf"
 $tmpFontPath = "$tmpDir/cascadia-code/$selectedFontName"
 $fontPath = "$fontsDir/$selectedFontName"
-Copy-Item -Path $tmpFontPath -Destination $fontsDir -Force -ErrorAction Stop
+Copy-Item -Path $tmpFontPath -Destination $fontsDir -Force
 $fontPath = Resolve-Path $fontPath
 
 $font = Get-FontGlyphTypefaceName -font_file_path $fontPath
 
-Add-ItemProperty -Path $fontsRegistry -Name $font.FontRegistryName -PropertyType string -Value $fontPath -ErrorAction Stop
+Add-ItemProperty -Path $fontsRegistry -Name $font.FontRegistryName -PropertyType string -Value $fontPath
 
 Write-Host "✅ Installed $($font.FontRegistryName) font"
 
