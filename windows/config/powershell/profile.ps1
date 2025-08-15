@@ -5,5 +5,7 @@ Import-Module -Name PSCompletions
 
 Set-PSReadLineOption -PredictionSource HistoryAndPlugin -PredictionViewStyle ListView
 
+fnm env --use-on-cd --shell powershell | Out-String | Invoke-Expression
+
 # Oh My Posh
 oh-my-posh init pwsh --config "$env:DotFiles/config/powershell/themes/default.omp.json" | Invoke-Expression
