@@ -56,15 +56,7 @@ Install-Module -Name WinGet-Essentials
 Install-Module -Name DockerCompletion
 # https://github.com/abgox/PSCompletions
 Install-Module -Name PSCompletions
-Import-Module -Name PSCompletions
-psc add pwsh
-psc add oh-my-posh
-psc add winget
-psc add wsl
-psc add git
-psc add env
-psc add fnm
-psc add pnpm
+sudo pwsh $dotFilesDir/installation/pwsh-completions.ps1
 $powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
 $powershellProfileInitDir = "$dotFilesDir/config/powershell/init"
