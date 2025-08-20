@@ -73,7 +73,7 @@ function Get-FontGlyphTypefaceName {
 $fontsDir = "$env:LOCALAPPDATA/Microsoft/Windows/Fonts"
 New-Item $fontsDir -ItemType Directory -Force > $null
 
-$fontsRegistry = "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+$fontsRegistry = "HKEY_CURRENT_USER:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 
 $tmpDir = "./tmp"
 New-Item $tmpDir -ItemType Directory -Force > $null
