@@ -51,12 +51,12 @@ New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Sourc
 
 # Powershell config
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-if($null -eq (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Ignore)) {
+if ($null -eq (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Ignore)) {
 	Install-PackageProvider -Name nuget -MinimumVersion 2.8.5.201 -Force
 }
-Install-Module -Name Microsoft.WinGet.Configuration
-Install-Module -Name WinGet-Essentials
-Install-Module -Name DockerCompletion
+Install-Module -Name Microsoft.WinGet.Configuration -Scope CurrentUser
+Install-Module -Name WinGet-Essentials -Scope CurrentUser
+Install-Module -Name DockerCompletion -Scope CurrentUser
 # https://github.com/abgox/PSCompletions
 Install-Module -Name PSCompletions -Scope CurrentUser
 sudo pwsh $dotFilesDir/installation/pwsh-completions.ps1
