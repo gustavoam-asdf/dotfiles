@@ -24,10 +24,10 @@ if (-not ($userPath -like "*$binDir*")) {
 	$env:Path += "$binDir;"
 }
 
-sudo pwsh $dotFilesDir/installation/fonts.ps1
-
 sudo winget import $dotFilesDir/installation/winget.json
 pwsh $dotFilesDir/installation/unlisted.ps1 --install_dir $binDir
+
+sudo pwsh $dotFilesDir/installation/fonts.ps1
 
 # Read fresh environment variables after installation
 $env:Path = [System.Environment]::GetEnvironmentVariable("Path")
@@ -58,7 +58,7 @@ Install-Module -Name Microsoft.WinGet.Configuration
 Install-Module -Name WinGet-Essentials
 Install-Module -Name DockerCompletion
 # https://github.com/abgox/PSCompletions
-Install-Module -Name PSCompletions
+Install-Module -Name PSCompletions -Scope CurrentUser
 sudo pwsh $dotFilesDir/installation/pwsh-completions.ps1
 $powershellCompletionsDir = "$dotFilesDir/config/powershell/completions"
 New-Item -ItemType Directory -Path $powershellCompletionsDir -Force > $null
