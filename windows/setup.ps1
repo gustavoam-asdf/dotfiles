@@ -7,7 +7,6 @@ if ($LASTEXITCODE -ne 0) {
 	exit $LASTEXITCODE
 }
 
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux -All
 wsl --install
 
 $dotFilesDir = Resolve-Path $PSScriptRoot
