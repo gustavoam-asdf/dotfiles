@@ -2,35 +2,35 @@
 param ()
 
 $ErrorActionPreference = 'Stop'
-Add-Type -AssemblyName System.Drawing
 
 function Get-FontGlyphTypefaceName {
 	[CmdletBinding()]
+	[OutputType([PSCustomObject])]
 	param(
 		[Parameter(Mandatory = $true, ValueFromPipeline = $true)]
-		[string]$font_file_path
+		[string]$FontFilePath
 	)
 
 	try {
 		Add-Type -AssemblyName PresentationCore, PresentationFramework, WindowsBase
 	}
 	catch {
-		Write-Error "Failed to load WPF assemblies. This function requires WPF components to run. $($_.Exception.Message)"
+		Write-Error "No se pudieron cargar los ensamblados de WPF. Esta función los requiere para ejecutarse. $($_.Exception.Message)"
 		return
 	}
 
-	if (-not (Test-Path $font_file_path -PathType Leaf)) {
-		Write-Warning "Font file not found: $font_file_path"
+	if (-not (Test-Path $FontFilePath -PathType Leaf)) {
+		Write-Warning "Archivo de fuente no encontrado: $FontFilePath"
 		return
 	}
 
-	$absolute_font_uri = New-Object System.Uri -ArgumentList (Resolve-Path $font_file_path).Path
+	$absoluteFontUri = New-Object System.Uri -ArgumentList (Resolve-Path $FontFilePath).Path
 
 	try {
-		$glyphTypeface = New-Object Windows.Media.GlyphTypeface -ArgumentList $absolute_font_uri
+		$glyphTypeface = New-Object Windows.Media.GlyphTypeface -ArgumentList $absoluteFontUri
 	}
 	catch {
-		Write-Error "Can not read internal name of font file '$font_file_path' (GlyphTypeface): $($_.Exception.Message)"
+		Write-Error "No se pudo leer el nombre interno del archivo de fuente '$FontFilePath' (GlyphTypeface): $($_.Exception.Message)"
 		return
 	}
 
@@ -50,13 +50,13 @@ function Get-FontGlyphTypefaceName {
 		}
 	}
 
-	$fontTypeIndicator = switch ([System.IO.Path]::GetExtension($font_file_path).ToLower()) {
+	$fontTypeIndicator = switch ([System.IO.Path]::GetExtension($FontFilePath).ToLower()) {
 		".ttf" { "(TrueType)" }
 		".otf" { "(OpenType)" }
 		default { "" }
 	}
 
-	$fontRegistryName = "$fontFamilyName"
+	$fontRegistryName = $fontFamilyName
 	if ($fontFaceName -ne "Regular" -and $fontFaceName -ne $fontFamilyName) {
 		$fontRegistryName += " $fontFaceName"
 	}
@@ -70,30 +70,47 @@ function Get-FontGlyphTypefaceName {
 	}
 }
 
-$fontsDir = "$env:LOCALAPPDATA/Microsoft/Windows/Fonts"
-New-Item $fontsDir -ItemType Directory -Force > $null
 
-$fontsRegistry = "HKEY_CURRENT_USER:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
+$fontsDir = Join-Path -Path $env:LOCALAPPDATA -ChildPath "Microsoft\Windows\Fonts"
+$fontsRegistry = "HKCU:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Fonts"
 
-$tmpDir = "./tmp"
-New-Item $tmpDir -ItemType Directory -Force > $null
+$tmpDir = Join-Path -Path $env:TEMP -ChildPath ([System.Guid]::NewGuid().ToString())
+
+
+Write-Host "Creando directorio temporal en: $tmpDir"
+New-Item -Path $tmpDir -ItemType Directory -Force > $null
 
 $fontUrl = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/CascadiaCode.zip"
-$fontZip = "$tmpDir/cascadia-code.tmp.zip"
+$fontZip = Join-Path -Path $tmpDir -ChildPath "cascadia-code.tmp.zip"
+$unzipDir = Join-Path -Path $tmpDir -ChildPath "cascadia-code"
 
 Invoke-WebRequest -Uri $fontUrl -OutFile $fontZip
-Expand-Archive -LiteralPath $fontZip -DestinationPath "$tmpDir/cascadia-code" -Force
+
+Expand-Archive -LiteralPath $fontZip -DestinationPath $unzipDir -Force
+
+if (-not (Test-Path -Path $fontsDir)) {
+	New-Item -Path $fontsDir -ItemType Directory -Force > $null
+}
 
 $selectedFontName = "CaskaydiaCoveNerdFontMono-Regular.ttf"
-$tmpFontPath = "$tmpDir/cascadia-code/$selectedFontName"
-$fontPath = "$fontsDir/$selectedFontName"
-Copy-Item -Path $tmpFontPath -Destination $fontsDir -Force
-$fontPath = Resolve-Path $fontPath
+$tmpFontPath = Join-Path -Path $unzipDir -ChildPath $selectedFontName
+$finalFontPath = Join-Path -Path $fontsDir -ChildPath $selectedFontName
 
-$font = Get-FontGlyphTypefaceName -font_file_path $fontPath
+Copy-Item -Path $tmpFontPath -Destination $finalFontPath -Force
 
-Add-ItemProperty -Path $fontsRegistry -Name $font.FontRegistryName -PropertyType string -Value $fontPath
+$font = Get-FontGlyphTypefaceName -FontFilePath $finalFontPath
+if (-not $font) {
+	throw "No se pudo obtener la información de la fuente. La instalación ha fallado."
+}
 
-Write-Host "✅ Installed $($font.FontRegistryName) font"
+Write-Host "Registrando fuente '$($font.FontRegistryName)'..."
+New-ItemProperty -Path $fontsRegistry -Name $font.FontRegistryName -PropertyType String -Value $finalFontPath -Force
 
-Remove-Item $tmpDir -Force -Recurse
+Write-Host "✅ ¡Fuente '$($font.FontRegistryName)' instalada correctamente!" -ForegroundColor Green
+
+$HWND_BROADCAST = 0xffff
+$WM_FONTCHANGE = 0x001D
+$user32 = Add-Type -MemberDefinition '[DllImport("user32.dll")] public static extern int SendMessage(int hWnd, int hMsg, int wParam, int lParam);' -Name 'user32' -PassThru
+$user32::SendMessage($HWND_BROADCAST, $WM_FONTCHANGE, 0, 0)
+
+Remove-Item -Path $tmpDir -Force -Recurse
