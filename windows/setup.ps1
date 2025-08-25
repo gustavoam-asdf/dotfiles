@@ -7,7 +7,7 @@ if ($LASTEXITCODE -ne 0) {
 	exit $LASTEXITCODE
 }
 
-wsl --install
+wsl --install --no-distribution
 
 $dotFilesDir = Resolve-Path $PSScriptRoot
 
