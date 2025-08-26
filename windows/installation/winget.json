@@ -1,6 +1,6 @@
 {
 	"$schema": "https://aka.ms/winget-packages.schema.2.0.json",
-	"CreationDate": "2025-08-25T18:53:05.518-00:00",
+	"CreationDate": "2025-08-26T11:21:34.627-00:00",
 	"Sources": [
 		{
 			"Packages": [
@@ -30,6 +30,9 @@
 				},
 				{
 					"PackageIdentifier": "WireGuard.WireGuard"
+				},
+				{
+					"PackageIdentifier": "FireDaemon.OpenSSL"
 				},
 				{
 					"PackageIdentifier": "Microsoft.AzureCLI"
