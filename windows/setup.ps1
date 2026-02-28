@@ -49,6 +49,15 @@ $gitConfig = [PSCustomObject]@{
 Remove-Item -Path $gitConfig.Target -Force -ErrorAction Ignore
 New-Item -ItemType SymbolicLink -Path $gitConfig.Target -Target $gitConfig.Source > $null
 
+# GEMINI config
+$geminiConfig = [PSCustomObject]@{
+	Source = "$dotFilesDir/config/gemini/GEMINI.md"
+	Target = "$HOME/.gemini/GEMINI.md"
+}
+New-Item -ItemType Directory -Path ([System.IO.Path]::GetDirectoryName($geminiConfig.Target)) -Force > $null
+Remove-Item -Path $geminiConfig.Target -Force -ErrorAction Ignore
+New-Item -ItemType SymbolicLink -Path $geminiConfig.Target -Target $geminiConfig.Source > $null
+
 # Powershell config
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 if ($null -eq (Get-PackageProvider -Name NuGet -ListAvailable -ErrorAction Ignore)) {
@@ -97,3 +106,4 @@ New-Item -ItemType SymbolicLink -Path $npmConfig.Target -Target $npmConfig.Sourc
 
 # Bun config
 pwsh -c "irm bun.sh/install.ps1 | iex"
+
